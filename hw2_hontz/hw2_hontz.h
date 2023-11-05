@@ -118,8 +118,8 @@ private:
 	vector<Plane*> registered_planes;
 
 	//initialize positive integers
-	int MAX_LANDED_PLANE_NUM = 2;
-	int AIRSPACE_DISTANCE = 50;
+	const int MAX_LANDED_PLANE_NUM = 2;
+	const int AIRSPACE_DISTANCE = 5;
 
 public:
 	//constructor that is empty
@@ -129,11 +129,10 @@ public:
 	~ATC();
 
 	//function register_plane takes in an airplane object to store in container
-	void register_plane(Plane* r_plane);
+	void register_plane(Plane& plane);
 	
-
 	//function called control_traffic contains the flow chart
-	void control_traffic(double timestep);
+	void control_traffic();
 };
 
 // TODO: Reference additional headers your program requires here.

@@ -182,32 +182,35 @@ ATC::ATC() {};
 ATC::~ATC() {};
 
 //function register_plane takes in an airplane object to store in container
-void ATC::register_plane(Plane* plane) {
-	registered_planes.push_back(plane);
+void ATC::register_plane(Plane& plane) {
+	registered_planes.push_back(&plane);
 }
 
-//idk not working 
+//idk if this is correct
 //function call for control_traffic
-void ATC::control_traffic(double timestep) {
+void ATC::control_traffic() {
 	int landed_planes = 0; //initialize landed_planes
 	int i = 0; //initialize i
 
 	//for loop to determine that if i is less than registered planes the the following will be set
-	for (i < ATC::registered_planes) {
-		landed_planes += Plane::at_SC;
-		i++;
-	}
-	//if statement to determine if landed planes is greater than or equal to the following will be set
-	if (landed_planes >= MAX_LANDED_PLANE_NUM) {
-		i = 0; //set i equal to zero
-		//for loop to determine if i is less than registered planes then the if stetment will be set
-		for (i < registered_planes) {
-			//if statement to set the loiter time and i++ values under specific conditions 
-			if (Plane::get_at_SCE == 0 && Plane::distance_to_SCE() <= ATC::AIRSPACE_DISTANCE && Plane::loiter_time == 0) {
-				Plane::loiter_time = 100;
-				i++;
+	for (Plane* a_plane : registered_planes) {
+			landed_planes += a_plane->get_at_SCE();
+			i++;
+
+			//if statement to determine if landed planes is greater than or equal to the following will be set
+			if (landed_planes >= MAX_LANDED_PLANE_NUM) {
+				i = 0; //set i equal to zero
+
+				//for loop to determine if i is less than registered planes then the if stetment will be set
+				for (Plane* b_plane : registered_planes) {
+
+					//if statement to set the loiter time and i++ values under specific conditions 
+					if (b_plane->get_at_SCE() == 0 && b_plane->distance_to_SCE() <= ATC::AIRSPACE_DISTANCE && b_plane->get_loiter_time() == 0) {
+						b_plane->set_loiter_time(100);
+						i++;
+					}
+				}
 			}
-		}
 	}
 }
 
@@ -243,7 +246,7 @@ int main(int argc, char** argv)
 	GeneralAviation General3("SCE", "ORD");
 	General3.set_vel(180 * 0.00027778);
 
-	//queation 7
+	//question 7
 	//creating a vector to store all of the airline data in
 	//create atc from class ATC
 	ATC atc;
@@ -264,17 +267,18 @@ int main(int argc, char** argv)
 	//create while (true) statement and call operate
 	while (true) {
 		
-		for (Plane* plane : atc.registered_planes) {
-			plane->operate(timestep); //call operate with time step input
-			atc.control_traffic(timestep);
+		for (Plane* c_plane : atc.registered_planes) {
+			c_plane->operate(timestep); //call operate with time step input
+			atc.control_traffic();
+
 			//print out the position of all airplanes at each timestep
-			/*cout << "From: " << plane->get_origin() << " To: " << plane->get_destination() << " Plane Type: " << plane->plane_type() << endl;
-			cout << "Position: " << plane->get_pos() << " miles" << endl;
-			cout << endl;*/
+			cout << "From: " << c_plane->get_origin() << " To: " << c_plane->get_destination() << " Plane Type: " << c_plane->plane_type() << endl;
+			cout << "Position: " << c_plane->get_pos() << " miles" << endl;
+			cout << endl;
 
 			//inputs plane type, origin, destination, and position, after the operate and control_traffic functions
 			//idk doesn't work
-			viz.visualize_plane(Plane::plane_type, Plane::origin, Plane::destination, Plane::position);
+			viz.visualize_plane(c_plane->plane_type(), c_plane->get_origin(), c_plane->get_destination(), c_plane->get_pos());
 
 			//call update with timestep as a an input
 			//read source code HW2_Visualizer.cpp
