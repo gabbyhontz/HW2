@@ -2,7 +2,7 @@
 //
 
 #include "hw2_hontz.h"
-#include "HW2_Visualizer (1).h"
+//#include "HW2_Visualizer (1).h"
 
 using namespace std;
 
@@ -214,7 +214,7 @@ void ATC::control_traffic() {
 	}
 }
 
-int main(int argc, char** argv)
+int main()
 {
 	//define container //question 1
 	multimap<string, pair<string, int>> flight_distance; //container from Q1' 
@@ -250,16 +250,16 @@ int main(int argc, char** argv)
 	//creating a vector to store all of the airline data in
 	//create atc from class ATC
 	ATC atc;
-	atc.register_plane(&American1);
-	atc.register_plane(&United1);
-	atc.register_plane(&United2);
-	atc.register_plane(&American2);
-	atc.register_plane(&General1);
-	atc.register_plane(&General2);
-	atc.register_plane(&General3);
+	atc.register_plane(American1);
+	atc.register_plane(United1);
+	atc.register_plane(United2);
+	atc.register_plane(American2);
+	atc.register_plane(General1);
+	atc.register_plane(General2);
+	atc.register_plane(General3);
 
 	//question 8
-	HW2_VIZ viz; // instantiate an object name dviz from a class HW2_VIZ
+	//HW2_VIZ viz; // instantiate an object name dviz from a class HW2_VIZ
 
 	double timestep = 52.0; //time step between [10,100] //s
 
@@ -278,11 +278,11 @@ int main(int argc, char** argv)
 
 			//inputs plane type, origin, destination, and position, after the operate and control_traffic functions
 			//idk doesn't work
-			viz.visualize_plane(c_plane->plane_type(), c_plane->get_origin(), c_plane->get_destination(), c_plane->get_pos());
+			//viz.visualize_plane(c_plane->plane_type(), c_plane->get_origin(), c_plane->get_destination(), c_plane->get_pos());
 
 			//call update with timestep as a an input
 			//read source code HW2_Visualizer.cpp
-			viz.update(timestep);
+			//viz.update(timestep);
 
 		}
 		//return 0;
