@@ -2,7 +2,7 @@
 //
 
 #include "hw2_hontz.h"
-//#include "HW2_Visualizer (1).h"
+#include "HW2_Visualizer (1).h"
 
 using namespace std;
 
@@ -186,7 +186,6 @@ void ATC::register_plane(Plane& plane) {
 	registered_planes.push_back(&plane);
 }
 
-//idk if this is correct
 //function call for control_traffic
 void ATC::control_traffic() {
 	int landed_planes = 0; //initialize landed_planes
@@ -246,6 +245,16 @@ int main()
 	GeneralAviation General3("SCE", "ORD");
 	General3.set_vel(180 * 0.00027778);
 
+	//question 5
+	/*vector<Plane*> atc;
+	atc.push_back(&American1);
+	atc.push_back(&United1);
+	atc.push_back(&United2);
+	atc.push_back(&American2);
+	atc.push_back(&General1);
+	atc.push_back(&General2);
+	atc.push_back(&General3);*/
+
 	//question 7
 	//creating a vector to store all of the airline data in
 	//create atc from class ATC
@@ -259,15 +268,19 @@ int main()
 	atc.register_plane(General3);
 
 	//question 8
-	//HW2_VIZ viz; // instantiate an object name dviz from a class HW2_VIZ
+	HW2_VIZ viz; // instantiate an object name dviz from a class HW2_VIZ
 
 	double timestep = 52.0; //time step between [10,100] //s
 
-	//idk not working 
 	//create while (true) statement and call operate
 	while (true) {
 		
-		for (Plane* c_plane : atc.registered_planes) {
+		//question 5
+		//for (Plane* c_plane : atc) {
+		//question 7
+		/////////////////////////////////////////////////////////////////////////////////idk if this is correct
+		/////////////////////////////////////////////////////////////////////////////////it won't work any other way
+		for (Plane* c_plane : atc.get_registered_planes()){
 			c_plane->operate(timestep); //call operate with time step input
 			atc.control_traffic();
 
@@ -276,13 +289,13 @@ int main()
 			cout << "Position: " << c_plane->get_pos() << " miles" << endl;
 			cout << endl;
 
+			//question 8
 			//inputs plane type, origin, destination, and position, after the operate and control_traffic functions
-			//idk doesn't work
-			//viz.visualize_plane(c_plane->plane_type(), c_plane->get_origin(), c_plane->get_destination(), c_plane->get_pos());
+			viz.visualize_plane(c_plane->plane_type(), c_plane->get_origin(), c_plane->get_destination(), c_plane->get_pos());
 
 			//call update with timestep as a an input
 			//read source code HW2_Visualizer.cpp
-			//viz.update(timestep);
+			viz.update(timestep);
 
 		}
 		//return 0;

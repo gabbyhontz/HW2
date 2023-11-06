@@ -122,6 +122,12 @@ private:
 	const int AIRSPACE_DISTANCE = 5;
 
 public:
+	////////////////////////////////////////////////////////////////////////idk if this is right
+	//return container values
+	vector <Plane*>& get_registered_planes() {
+		return registered_planes;
+	};
+
 	//constructor that is empty
 	ATC();
 
