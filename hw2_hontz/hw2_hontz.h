@@ -119,7 +119,7 @@ private:
 
 	//initialize positive integers
 	const int MAX_LANDED_PLANE_NUM = 2;
-	const int AIRSPACE_DISTANCE = 5;
+	const int AIRSPACE_DISTANCE = 50;
 
 public:
 	////////////////////////////////////////////////////////////////////////idk if this is right
