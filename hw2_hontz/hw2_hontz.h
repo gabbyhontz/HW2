@@ -122,9 +122,8 @@ private:
 	const int AIRSPACE_DISTANCE = 50;
 
 public:
-	////////////////////////////////////////////////////////////////////////idk if this is right
-	//return container values
-	vector <Plane*>& get_registered_planes() {
+	//get function for registered planes
+	vector<Plane*> get_registered_planes() {
 		return registered_planes;
 	};
 
@@ -135,7 +134,7 @@ public:
 	~ATC();
 
 	//function register_plane takes in an airplane object to store in container
-	void register_plane(Plane& plane);
+	void register_plane(Plane* plane);
 	
 	//function called control_traffic contains the flow chart
 	void control_traffic();

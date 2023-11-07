@@ -1,8 +1,11 @@
-﻿// hw2_hontz.cpp : Defines the entry point for the application.
+﻿//Gabriella Hontz's Code
+//I assisted Nicole Collom, Serin Santhosh, and Megan O'Brien on portions of this HW2 code
+
+// hw2_hontz.cpp : Defines the entry point for the application.
 //
 
 #include "hw2_hontz.h"
-#include "HW2_Visualizer (1).h"
+//#include "HW2_Visualizer (1).h" //question 8
 
 using namespace std;
 
@@ -182,8 +185,8 @@ ATC::ATC() {};
 ATC::~ATC() {};
 
 //function register_plane takes in an airplane object to store in container
-void ATC::register_plane(Plane& plane) {
-	registered_planes.push_back(&plane);
+void ATC::register_plane(Plane* plane) {
+	registered_planes.push_back(plane);
 }
 
 //function call for control_traffic
@@ -213,13 +216,19 @@ void ATC::control_traffic() {
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
+	////define container //question 1
+	//multimap<string, pair<string, int>> flight_distance; //container from Q1 
+	//flight_distance.insert(make_pair("SCE", make_pair("PHL", 160)));
+	//flight_distance.insert(make_pair("SCE", make_pair("ORD", 640)));
+	//flight_distance.insert(make_pair("SCE", make_pair("EWR", 220)));
+
 	//define container //question 1
-	multimap<string, pair<string, int>> flight_distance; //container from Q1' 
-	flight_distance.insert(make_pair("SCE", make_pair("PHL", 160)));
-	flight_distance.insert(make_pair("SCE", make_pair("ORD", 640)));
-	flight_distance.insert(make_pair("SCE", make_pair("EWR", 220)));
+	map<string, map<string, int>> flight_distance; //container from Q1 
+	flight_distance["SCE"]["PHL"] = 160;
+	flight_distance["SCE"]["ORD"] = 640;
+	flight_distance["SCE"]["EWR"] = 220;
 
 	//question 5
 	//seven objects representing aircraft in the table
@@ -259,16 +268,16 @@ int main()
 	//creating a vector to store all of the airline data in
 	//create atc from class ATC
 	ATC atc;
-	atc.register_plane(American1);
-	atc.register_plane(United1);
-	atc.register_plane(United2);
-	atc.register_plane(American2);
-	atc.register_plane(General1);
-	atc.register_plane(General2);
-	atc.register_plane(General3);
+	atc.register_plane(&American1);
+	atc.register_plane(&United1);
+	atc.register_plane(&United2);
+	atc.register_plane(&American2);
+	atc.register_plane(&General1);
+	atc.register_plane(&General2);
+	atc.register_plane(&General3);
 
 	//question 8
-	HW2_VIZ viz; // instantiate an object name dviz from a class HW2_VIZ
+	//HW2_VIZ viz; // instantiate an object name dviz from a class HW2_VIZ
 
 	double timestep = 52.0; //time step between [10,100] //s
 
@@ -278,8 +287,6 @@ int main()
 		//question 5
 		//for (Plane* c_plane : atc) {
 		//question 7
-		/////////////////////////////////////////////////////////////////////////////////idk if this is correct
-		/////////////////////////////////////////////////////////////////////////////////it won't work any other way
 		for (Plane* c_plane : atc.get_registered_planes()){
 			c_plane->operate(timestep); //call operate with time step input
 			atc.control_traffic();
@@ -291,11 +298,12 @@ int main()
 
 			//question 8
 			//inputs plane type, origin, destination, and position, after the operate and control_traffic functions
-			viz.visualize_plane(c_plane->plane_type(), c_plane->get_origin(), c_plane->get_destination(), c_plane->get_pos());
+			//viz.visualize_plane(c_plane->plane_type(), c_plane->get_origin(), c_plane->get_destination(), c_plane->get_pos());
 
+			//question 8
 			//call update with timestep as a an input
 			//read source code HW2_Visualizer.cpp
-			viz.update(timestep);
+			//viz.update(timestep);
 
 		}
 		//return 0;
