@@ -286,7 +286,7 @@ int main(/*int argc, char** argv*/)
 
 	//create while (true) statement and call operate
 	while (true) {
-		
+
 		//question 5
 		//for (Plane* c_plane : atc) {
 		//question 7
