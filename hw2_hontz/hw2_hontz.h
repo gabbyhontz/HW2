@@ -76,10 +76,12 @@ public:
 
 };
 
+//question 4
+//inherited from the class plane
 class Airliner : public Plane {
 
 private:
-	string Airline;
+	string Airline; //string variale named Airline
 
 public:
 
@@ -98,6 +100,8 @@ public:
 
 };
 
+//question 4
+//inherited from the class plane
 class GeneralAviation : public Plane {
 public:
 	//constructor that takes in from and to and passes inputs to class plane

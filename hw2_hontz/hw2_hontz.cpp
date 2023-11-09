@@ -1,5 +1,5 @@
 ﻿//Gabriella Hontz's Code
-//I assisted Nicole Collom, Serin Santhosh, and Megan O'Brien on portions of this HW2 code
+//I assisted Nicole Collom, Serin Santhosh, Megan O'Brien, and Cecelia Erndwein on portions of this HW2 code
 
 // hw2_hontz.cpp : Defines the entry point for the application.
 //
@@ -17,10 +17,14 @@ Plane::Plane(const string& from, const string& to) {
 	origin = from; //input string from in origin variable
 	destination = to; //input string to in destination variable
 
+	//question 1
 	//distance equal to origin and destination airports
+	//initialization of distances between airports
 	flight_distance["SCE"]["PHL"] = 160;
 	flight_distance["SCE"]["ORD"] = 640;
 	flight_distance["SCE"]["EWR"] = 220;
+
+	//set disatnce equal to distance between origin and destination
 	distance = flight_distance[origin][destination];
 
 	//initialize the values of variables to zero
@@ -37,19 +41,20 @@ Plane::~Plane() {}
 
 //function named operate with double variables dt as an input and return nothing
 void Plane::operate(double dt) {
+	//if not equal to 0
 	if (loiter_time != 0) {
-		loiter_time -= dt;
+		loiter_time -= dt; //loiter_time=loiter_time-dt
 	}
-	else if (wait_time != 0) {
-		wait_time -= dt;
+	else if (wait_time != 0) { //else if wait_time is not equal to 0
+		wait_time -= dt; //wait_time=wait_time-dt
 	}
-	else if (pos < distance) {
-		pos += vel * dt;
-		at_SCE = 0;
+	else if (pos < distance) { //else if pos is less than distance
+		pos += vel * dt; //pos=pos+(vel*dt)
+		at_SCE = 0; //at_SCE is set to be zero
 	}
-	else if (destination == "SCE") {
-		at_SCE = 1;
-		time_on_ground();
+	else if (destination == "SCE") { //else if destination is SCE
+		at_SCE = 1; //set at_SCE equal to 1
+		time_on_ground(); //call function time_on_ground()
 
 		//swap the value of destination and origin
 		string swap;
@@ -57,10 +62,10 @@ void Plane::operate(double dt) {
 		origin = destination;
 		destination = swap;
 
-		pos = 0.0;
+		pos = 0.0; //set pos to be zero
 	}
-	else {
-		time_on_ground();
+	else { //if none of these statements are true then do the following
+		time_on_ground(); //call function time_on_ground()
 
 		//swap the value of destination and origin
 		string swap;
@@ -68,48 +73,48 @@ void Plane::operate(double dt) {
 		origin = destination;
 		destination = swap;
 
-		pos = 0.0;
+		pos = 0.0; //set pos to be zero
 	}
 }
 
 //get function for pos 
 double Plane::get_pos() const {
-	return pos;
+	return pos; //return value of their variable
 }
 
 //get functions for vel 
 double Plane::get_vel() const {
-	return vel;
+	return vel; //return value of their variable
 }
 
 //get functions for loiter_time
 double Plane::get_loiter_time() const {
-	return loiter_time;
+	return loiter_time; //return value of their variable
 }
 
 //get function for origin
 string Plane::get_origin() const {
-	return origin;
+	return origin; //return value of their variable
 }
 
 //get function for destination
 string Plane::get_destination() const {
-	return destination;
+	return destination; //return value of their variable
 }
 
 //get functionfor at_SCE
 bool Plane::get_at_SCE() const {
-	return at_SCE;
+	return at_SCE; //return value of their variable
 }
 
 //set functions for vel
 void Plane::set_vel(double vel2) {
-	vel = vel2;
+	vel = vel2; //set value based on an input
 }
 
 //set functions for loiter_time
 void Plane::set_loiter_time(double loiter_time2) {
-	loiter_time = loiter_time2;
+	loiter_time = loiter_time2; //set value based on an input
 }
 
 //a function names distance_to_SCE that return double
@@ -145,8 +150,7 @@ double Plane::draw_from_normal_dist(double mean, double std_dev) {
 }
 
 //airliner class //question 4
-
-//constructor takes in airline, from, and to; stores input sirline in airline; and passes from anf to to plane class
+//constructor takes in airline, from, and to; stores input airline in airline; and passes from and to to plane class
 Airliner::Airliner(const string& Airline, const string& from, const string& to) :Plane(from, to), Airline(Airline) {}
 
 //empty deconstructor
@@ -164,8 +168,7 @@ double Airliner::time_on_ground() {
 }
 
 //general aviation class //question 4
-
-	//constructor that takes in from and to and passes inputs to class plane
+//constructor that takes in from and to and passes inputs to class plane
 GeneralAviation::GeneralAviation(const string& from, const string& to) :Plane(from, to) {}
 
 //empty deconstructor 
@@ -216,7 +219,8 @@ void ATC::control_traffic() {
 	}
 }
 
-int main(int argc, char** argv)
+//question 8
+int main(/*int argc, char** argv*/)
 {
 	////define container //question 1
 	//multimap<string, pair<string, int>> flight_distance; //container from Q1 
@@ -233,26 +237,26 @@ int main(int argc, char** argv)
 	//question 5
 	//seven objects representing aircraft in the table
 	//velocities in table are in miles per hour //multipled to be miles per second
-	Airliner American1("AA", "SCE", "PHL");
-	American1.set_vel(470 * 0.00027778);
+	Airliner American1("AA", "SCE", "PHL"); //airliner 1 //american 1
+	American1.set_vel(470 * 0.00027778); //multiplied to get in terms of miles per seconds
 
-	Airliner United1("UU", "SCE", "ORD");
-	United1.set_vel(515 * 0.00027778);
+	Airliner United1("UA", "SCE", "ORD"); //airliner 2 //united 1
+	United1.set_vel(515 * 0.00027778); //multiplied to get in terms of miles per seconds
 
-	Airliner United2("UU", "SCE", "EWR");
-	United2.set_vel(480 * 0.00027778);
+	Airliner United2("UA", "SCE", "EWR"); //airliner 3 //united 2
+	United2.set_vel(480 * 0.00027778); //multiplied to get in terms of miles per seconds
 
-	Airliner American2("AA", "SCE", "ORD");
-	American2.set_vel(500 * 0.00027778);
+	Airliner American2("AA", "SCE", "ORD"); //airliner 4 //american 2
+	American2.set_vel(500 * 0.00027778); //multiplied to get in terms of miles per seconds
 
-	GeneralAviation General1("SCE", "PHL");
-	General1.set_vel(140 * 0.00027778);
+	GeneralAviation General1("SCE", "PHL"); //general 1
+	General1.set_vel(140 * 0.00027778); //multiplied to get in terms of miles per seconds
 
-	GeneralAviation General2("SCE", "EWR");
-	General2.set_vel(160 * 0.00027778);
+	GeneralAviation General2("SCE", "EWR"); //general 2
+	General2.set_vel(160 * 0.00027778); //multiplied to get in terms of miles per seconds
 
-	GeneralAviation General3("SCE", "ORD");
-	General3.set_vel(180 * 0.00027778);
+	GeneralAviation General3("SCE", "ORD"); //general 3
+	General3.set_vel(180 * 0.00027778); //multiplied to get in terms of miles per seconds
 
 	//question 5
 	/*vector<Plane*> atc;
@@ -279,7 +283,7 @@ int main(int argc, char** argv)
 	//question 8
 	//HW2_VIZ viz; // instantiate an object name dviz from a class HW2_VIZ
 
-	double timestep = 52.0; //time step between [10,100] //s
+	double timestep = 52.0; //time step between [10,100] //time in seconds
 
 	//create while (true) statement and call operate
 	while (true) {
