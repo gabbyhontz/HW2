@@ -1,15 +1,16 @@
-﻿# CMakeList.txt : Top-level CMake project file, do global configuration
-# and include sub-projects here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.2) # Specify CMake version.
+project(Homework2) # A project name. This can be anything.
+set(CMAKE_CXX_STANDARD 20) # Specify C++ version.
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/include) # include all header files in the current folder
+add_executable(${CMAKE_PROJECT_NAME} hw2_hontz.cpp hw2_hontz.h
+				HW2_Visualizer.h HW2_Visualizer.cpp) # add source files to the executable
+				
+target_link_libraries(${CMAKE_PROJECT_NAME} "${CMAKE_SOURCE_DIR}/lib/SDL2d.lib;${CMAKE_SOURCE_DIR}/lib/SDL2maind.lib")
+set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/bin")
 
-# Enable Hot Reload for MSVC compilers if supported.
-if (POLICY CMP0141)
-  cmake_policy(SET CMP0141 NEW)
-  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
-endif()
-
-project ("hw2_hontz")
-
-# Include sub-projects.
-add_subdirectory ("hw2_hontz")
+# Copy the dynamic library to the same folder as the executable file.
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD           # Adds a post-build event to MyTest
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different       # which executes "cmake - E copy_if_different..."
+        "${CMAKE_SOURCE_DIR}/lib/SDL2d.dll"             # <--this is in-file
+        "${CMAKE_SOURCE_DIR}/map.bmp" 					# <--this is also in-file
+        $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>)       # <--this is out-file path

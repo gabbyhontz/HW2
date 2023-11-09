@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\paint\OneDrive\Desktop\hw2_hontz\hw2_hontz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\paint\OneDrive\Desktop\hw2_hontz\HW2_Visualizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\paint\OneDrive\Desktop\hw2_hontz\hw2_hontz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\paint\OneDrive\Desktop\hw2_hontz\HW2_Visualizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\paint\OneDrive\Desktop\hw2_hontz\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{BD7FE28F-ADFF-3AE5-AC7D-7EA7744788DE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D8543EF0-30A4-31FC-BEE8-D803DB05A885}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

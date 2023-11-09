@@ -1,0 +1,3 @@
+C:/Users/paint/OneDrive/Desktop/hw2_hontz/build/CMakeFiles/Homework2.dir
+C:/Users/paint/OneDrive/Desktop/hw2_hontz/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/paint/OneDrive/Desktop/hw2_hontz/build/CMakeFiles/ZERO_CHECK.dir

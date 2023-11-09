@@ -1,0 +1,10 @@
+^C:\USERS\PAINT\ONEDRIVE\DESKTOP\HW2_HONTZ\BUILD\CMAKEFILES\E853D48D3208643439662C4AC8F6D565\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/paint/OneDrive/Desktop/hw2_hontz -BC:/Users/paint/OneDrive/Desktop/hw2_hontz/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/paint/OneDrive/Desktop/hw2_hontz/build/Homework2.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
