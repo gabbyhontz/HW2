@@ -197,25 +197,24 @@ void ATC::control_traffic() {
 	int landed_planes = 0; //initialize landed_planes
 	int i = 0; //initialize i
 
-	//for loop to determine that if i is less than registered planes the the following will be set
-	for (Plane* a_plane : registered_planes) {
-			landed_planes += a_plane->get_at_SCE();
-			i++;
+	//if statement that runs when i is less than the number of registered planes
+	if (i < registered_planes.size()) {
+		//landed planes += at_SCE of the plane i
+		landed_planes += registered_planes[i]->get_at_SCE();
+		i++;
+	}
 
-			//if statement to determine if landed planes is greater than or equal to the following will be set
-			if (landed_planes >= MAX_LANDED_PLANE_NUM) {
-				i = 0; //set i equal to zero
+	//else if stetement to check if landed_planes is greater than or equal to max landed plane number
+	else if (landed_planes >= MAX_LANDED_PLANE_NUM) {
+		i = 0; //set i equal to zero
 
-				//for loop to determine if i is less than registered planes then the if stetment will be set
-				for (Plane* b_plane : registered_planes) {
-
-					//if statement to set the loiter time and i++ values under specific conditions 
-					if (b_plane->get_at_SCE() == 0 && b_plane->distance_to_SCE() <= ATC::AIRSPACE_DISTANCE && b_plane->get_loiter_time() == 0) {
-						b_plane->set_loiter_time(100);
-						i++;
-					}
-				}
+		if (i < registered_planes.size()) {
+			//if statement to set the loiter time and i++ values under specific conditions 
+			if (registered_planes[i]->get_at_SCE() == 0 && registered_planes[i]->distance_to_SCE() <= ATC::AIRSPACE_DISTANCE && registered_planes[i]->get_loiter_time() == 0) {
+				registered_planes[i]->set_loiter_time(100);
+				i++;
 			}
+		}
 	}
 }
 
